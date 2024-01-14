@@ -1,5 +1,5 @@
-resource "aws_security_group" "acesso_ssh"{
-    name ="acesso_ssh_${var.env}"
+resource "aws_security_group" "access_ssh"{
+    name ="access_ssh_${var.env}"
     description = "grupo ${var.env}"
     ingress{
         cidr_blocks = ["0.0.0.0/0"]
@@ -9,12 +9,12 @@ resource "aws_security_group" "acesso_ssh"{
         protocol = "tcp"
     }
     tags = {
-        Name = "acesso_ssh_${var.env}"
+        Name = "access_ssh_${var.env}"
     }
 }
 
-resource "aws_security_group" "acesso_app_port"{
-    name ="acesso_app_port_${var.env}"
+resource "aws_security_group" "access_app_port"{
+    name ="acess_app_port_${var.env}"
     description = "grupo ${var.env}"
     ingress{
         cidr_blocks = ["0.0.0.0/0"]
@@ -28,8 +28,38 @@ resource "aws_security_group" "acesso_app_port"{
     }
 }
 
-resource "aws_security_group" "acesso_db_port"{
-    name ="acesso_db_port_${var.env}"
+resource "aws_security_group" "access_http"{
+    name ="access_http_${var.env}"
+    description = "grupo ${var.env}"
+    egress{
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+    }
+    tags = {
+        Name = "access_http_${var.env}"
+    }
+}
+
+resource "aws_security_group" "access_https"{
+    name ="access_https_${var.env}"
+    description = "grupo ${var.env}"
+    egress{
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+    }
+    tags = {
+        Name = "access_https_${var.env}"
+    }
+}
+
+resource "aws_security_group" "access_db_port"{
+    name ="access_db_port_${var.env}"
     description = "grupo ${var.env}"
     egress{
         cidr_blocks = ["0.0.0.0/0"]
